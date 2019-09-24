@@ -5,6 +5,7 @@ import time
 import requests
 from pyquery import PyQuery as pq
 
+import bet
 import utils
 
 
@@ -145,8 +146,17 @@ class JJB(object):
             print("主场赔率：%s, 客场赔率：%s, 是否停盘：%s" % (left_rate, right_rate, is_pause))
             count += 1
             print(count)
+            if not is_pause:
+                rate = {
+                    "left": left_rate,
+                    "right": right_rate,
+                }
+                bet.Bet().bet(rate)
 
 
 jjb = JJB()
-jjb.login("zhaohf358", "zhaohongfei")
-jjb.sign_in()
+# jjb.login("zhaohf358", "zhaohongfei")
+# jjb.sign_in()
+
+jjb.refresh_bet_price("Sparking", "Team")
+
